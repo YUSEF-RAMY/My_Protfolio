@@ -41,7 +41,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 bg-[#0a0a0a] relative overflow-hidden">
       {/* الخلفية الجمالية */}
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-[#3a5a40]/10 blur-[120px] rounded-full" />
+      {/* <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-[#3a5a40]/10 blur-[120px] rounded-full" /> */}
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-[#5c4033]/10 blur-[120px] rounded-full" />
 
       <div className="container mx-auto px-6 relative z-10">
