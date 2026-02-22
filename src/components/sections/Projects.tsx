@@ -17,7 +17,7 @@ interface ProjectData {
   isPrivate?: boolean; 
 }
 
-// 2. مصفوفة البيانات (تم تغيير الاسم لـ allProjects لحل التعارض)
+// 2. مصفوفة البيانات (allProjects)
 const allProjects: ProjectData[] = [
   {
     id: 1,
@@ -36,7 +36,7 @@ const allProjects: ProjectData[] = [
     image: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=2070&auto=format&fit=crop",
     description: "A specialized booking system developed during the ITI program. It manages resource reservations, user schedules, and booking confirmations.",
     technologies: ["PHP", "Laravel", "MySQL", "Bootstrap"],
-    github: "https://github.com/YUSEF-RAMY/Booking-Book" 
+    github: "https://github.com/YUSEF-RAMY/Book-Reservation" 
   },
   {
     id: 3,
@@ -107,7 +107,7 @@ const Projects = () => {
                 {/* Image */}
                 <div className="relative h-56 w-full overflow-hidden shrink-0">
                     <img src={project.image} alt={project.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
-                    <div className="absolute inset-0 bg-[#000]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                         <button onClick={() => setSelectedProject(project)} className="p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-[#3a5a40] transition-colors">
                             <Eye size={24} />
                         </button>
@@ -147,46 +147,62 @@ const Projects = () => {
           </AnimatePresence>
         </motion.div>
 
-        {/* Modal */}
+      {/* Modal */}
         <Modal isOpen={!!selectedProject} onClose={() => setSelectedProject(null)}>
-            {selectedProject && (
-                <div className="bg-[#0f0f0f] rounded-3xl overflow-y-auto max-h-[90vh] border border-gray-800 text-left" dir="ltr">
-                     <div className="h-48 md:h-80 overflow-hidden relative">
-                        <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover"/>
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0f0f0f]" />
-                    </div>
-                    <div className="p-6 md:p-8 flex flex-col items-start">
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 w-full">
-                             <div className="text-left">
-                                <h2 className="text-2xl md:text-3xl font-bold mb-2 text-white">{selectedProject.title}</h2>
-                                <span className="text-[#3a5a40] font-bold tracking-widest uppercase text-sm">{selectedProject.category}</span>
-                             </div>
-                             <div className="flex gap-3">
-                                {selectedProject.isPrivate ? (
-                                    <a href="#contact" onClick={() => setSelectedProject(null)} className="flex items-center gap-2 px-6 py-2 bg-[#3a5a40] text-white rounded-full hover:bg-[#2d4330] shadow-lg shadow-[#3a5a40]/20 transition-all text-sm font-bold">
-                                        <Mail size={18} /> Request Demo
-                                    </a>
-                                ) : (
-                                    <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-2 bg-[#111] text-gray-300 border border-gray-800 rounded-full hover:border-[#5c4033] transition-all text-sm">
-                                        <Github size={18} /> View Code
-                                    </a>
-                                )}
-                             </div>
-                        </div>
-                        <p className="text-gray-400 text-base md:text-lg mb-8 leading-relaxed text-left">
-                            {selectedProject.description}
-                        </p>
-                        <h4 className="text-sm font-bold mb-4 text-[#8b5e3c] uppercase tracking-widest">Technologies Stack</h4>
-                        <div className="flex flex-wrap gap-2 justify-start">
-                             {selectedProject.technologies.map(tech => (
-                                <span key={tech} className="px-4 py-1 bg-[#3a5a40]/5 border border-[#3a5a40]/20 text-[#3a5a40] rounded-full text-xs font-bold">
-                                    {tech}
-                                </span>
-                             ))}
-                        </div>
+    {selectedProject && (
+        <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-[#0f0f0f] rounded-3xl border border-gray-800 text-left overflow-hidden w-full max-w-5xl mx-auto shadow-2xl flex flex-col md:flex-row h-full md:h-auto" 
+            dir="ltr"
+        >
+            {/* القسم الأيسر: الصورة (بتاخد مساحة ثابتة في الـ Desktop) */}
+            <div className="w-full md:w-1/2 h-64 md:h-auto relative shrink-0">
+                <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover"/>
+                <div className="absolute inset-0 bg-linear-to-r from-transparent to-[#0f0f0f] hidden md:block" />
+                <div className="absolute inset-0 bg-linear-to-b from-transparent to-[#0f0f0f] md:hidden" />
+            </div>
+
+            {/* القسم الأيمن: البيانات */}
+            <div className="p-8 md:p-12 w-full md:w-1/2 flex flex-col justify-center">
+                <div className="mb-6">
+                    <span className="text-[#3a5a40] font-bold tracking-[0.2em] uppercase text-xs px-3 py-1 bg-[#3a5a40]/10 rounded-lg border border-[#3a5a40]/20">
+                        {selectedProject.category}
+                    </span>
+                    <h2 className="text-3xl md:text-5xl font-bold mt-4 mb-4 text-white tracking-tight leading-tight">
+                        {selectedProject.title}
+                    </h2>
+                </div>
+                
+                <p className="text-gray-400 text-base md:text-lg mb-8 leading-relaxed">
+                    {selectedProject.description}
+                </p>
+
+                <div className="mb-8">
+                    <h4 className="text-xs font-bold mb-4 text-[#8b5e3c] uppercase tracking-[0.3em]">Technologies Stack</h4>
+                    <div className="flex flex-wrap gap-2">
+                         {selectedProject.technologies.map(tech => (
+                            <span key={tech} className="px-4 py-1.5 bg-[#111] border border-gray-800 text-gray-300 rounded-lg text-xs font-medium">
+                                {tech}
+                            </span>
+                         ))}
                     </div>
                 </div>
-            )}
+
+                <div className="flex gap-4">
+                    {selectedProject.isPrivate ? (
+                        <a href="#contact" onClick={() => setSelectedProject(null)} className="flex items-center gap-2 px-8 py-3 bg-[#3a5a40] text-white rounded-xl hover:bg-[#2d4330] shadow-lg shadow-[#3a5a40]/20 transition-all font-bold text-sm">
+                            <Mail size={18} /> Request Demo
+                        </a>
+                    ) : (
+                        <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-8 py-3 bg-[#111] text-gray-300 border border-gray-800 rounded-xl hover:border-[#5c4033] transition-all font-bold text-sm">
+                            <Github size={18} /> View Code
+                        </a>
+                    )}
+                </div>
+            </div>
+        </motion.div>
+    )}
         </Modal>
       </div>
     </section>
