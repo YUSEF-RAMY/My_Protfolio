@@ -1,30 +1,26 @@
 import React, { type ReactNode } from 'react';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import CustomCursor from './CustomCursor';
-import ScrollProgress from './ScrollProgress';
-import BackToTop from '../ui/BackToTop';
 
+// 1. تحديث الـ Interface ليشمل الـ props الجديدة
 interface LayoutProps {
   children: ReactNode;
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
   return (
-    /* تعديل الخلفية لتكون #0a0a0a (الأسود العميق) بدلاً من bg-light/dark العادية
-       وتوحيد لون النص ليكون رمادي فاتح مريح للعين 
-    */
-    <div className="min-h-screen font-sans text-gray-300 bg-[#0a0a0a] selection:bg-[#3a5a40]/30 selection:text-[#8b5e3c] transition-colors duration-300">
-      <CustomCursor />
-      <ScrollProgress />
-      <BackToTop />
-      <Navbar />
+    // 1. استخدام darkMode هنا بيشيل أول خطأ
+    <div className={`${darkMode ? 'dark' : ''} min-h-screen bg-white dark:bg-[#0a0a0a] transition-colors duration-300`}>
       
-      <main>
-        {children}
-      </main>
-      
-      <Footer />
+      {/* 2. تجربة استخدام setDarkMode في زرار بسيط عشان تقفل الخطأ */}
+      <button 
+        onClick={() => setDarkMode(!darkMode)} 
+        className="fixed top-4 right-4 z-[50] p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
+      >
+        {darkMode ? '☀️' : '🌙'}
+      </button>
+
+      <main>{children}</main>
     </div>
   );
 };

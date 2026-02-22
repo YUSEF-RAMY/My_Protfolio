@@ -5,12 +5,14 @@ import Services from './components/sections/Services';
 import Skills from './components/sections/Skills';
 import Experience from './components/sections/Experience';
 import Projects from './components/sections/Projects';
-import Contact from './components/sections/Contact';
+// import Contact from './components/sections/Contact';
 import { ToastProvider } from './components/ui/Toast';
 import emailjs from '@emailjs/browser';
 
 
 emailjs.init("BV0ubTE9MvHPLFu49");
+// ... باقي الـ imports
+
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -30,15 +32,16 @@ function App() {
     }
   }, [darkMode]);
 
-
   return (
     <ToastProvider>
-      <Layout>
+      {/* 1. هنا التعديل: نمرر الحالة للدالة المتحكمة في الشكل العام */}
+      <Layout darkMode={darkMode} setDarkMode={setDarkMode}>
         <Hero />
         <Services />
         <Skills />
         <Experience />
         <Projects />
+        {/* ما تنساش تشيل التعليق عن Contact لما تخلصها */}
         {/* <Contact /> */}
       </Layout>
     </ToastProvider>
@@ -46,3 +49,4 @@ function App() {
 }
 
 export default App;
+
