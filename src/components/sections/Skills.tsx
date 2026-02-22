@@ -5,7 +5,7 @@ const skills = [
   { name: "PHP & Laravel", level: 95 },
   { name: "Cloud Computing (AWS / Huawei)", level: 90 },
   { name: "MySQL & Database Design", level: 90 },
-  { name: "React.js & Tailwind CSS & Livewire", level: 85 },
+  { name: " Livewire & Tailwind CSS", level: 85 },
   { name: "RESTful API Development", level: 95 },
   { name: "Linux & DevOps Basics", level: 80 },
 ];
