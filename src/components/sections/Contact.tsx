@@ -1,43 +1,49 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Loader2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import SectionHeading from '../ui/SectionHeading';
 import { useToast } from '../ui/Toast';
-import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const { addToast } = useToast();
-  const formRef = useRef<HTMLFormElement>(null); // أضف النوع ليعمل الـ reset() 
+  
+  // 1. تحديد النوع HTMLFormElement يحل مشكلة الـ TypeScript في الصورة
+  const formRef = useRef<HTMLFormElement>(null); 
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  if (!formRef.current) return;
+    if (!formRef.current) return;
 
-  emailjs.sendForm(
-    'service_n60cttj',  // مطابق لصورتك
-    'template_hqdw3wj', // مطابق لصورتك
-    formRef.current,    // تم إصلاح الخطأ الأحمر هنا
-    'BV0ubTE9MvHPLFu49' // الـ Public Key الخاص بك
-  )
-  .then((result) => {
-      console.log('SUCCESS!', result.text);
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      addToast('Message Sent! Check your inbox.', 'success');
-      formRef.current?.reset(); // تم إصلاح الخطأ هنا
-      setTimeout(() => setIsSuccess(false), 5000);
-  })
-  .catch((error) => {
-      console.error('FAILED...', error);
-      setIsSubmitting(false);
-      // هذا هو الخطأ الذي ظهر لك في المتصفح
-      addToast('Error: Please check your connection or dashboard.', 'error');
-  });
-};
+    // 2. الربط المباشر مع البيانات الدقيقة من صورك
+    emailjs.sendForm(
+      'service_n60cttj',  // Service ID من صورتك
+      'template_hqdw3wj', // Template ID من صورتك
+      formRef.current, 
+      'BV0ubTE9MvHPLFu49' // Public Key بتاعك
+    )
+    .then((result) => {
+        console.log('SUCCESS!', result.text);
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        addToast('Message Sent! Check your email.', 'success');
+        
+        // 3. علامة الاستفهام هنا تحمي الكود من الـ Crash
+        formRef.current?.reset(); 
+        
+        setTimeout(() => setIsSuccess(false), 5000);
+    })
+    .catch((error) => {
+        console.error('FAILED...', error);
+        setIsSubmitting(false);
+        addToast('Failed to send. Check console or dashboard.', 'error');
+    });
+  };
 
   return (
     <section id="contact" className="py-20 bg-[#0a0a0a] relative overflow-hidden">
@@ -46,7 +52,7 @@ const Contact = () => {
 
         <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto mt-12">
           
-          {/* الجانب الأيسر: المعلومات */}
+          {/* الجانب الأيسر: معلومات التواصل */}
           <div className="lg:w-1/2 space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                  {[
@@ -72,7 +78,7 @@ const Contact = () => {
                  ))}
             </div>
 
-            {/* الخريطة */}
+            {/* الخريطة الأنيميشن */}
             <div className="bg-[#111] rounded-2xl overflow-hidden h-64 md:h-80 shadow-2xl relative border border-gray-800">
                  <div className="absolute inset-0 bg-black grid grid-cols-[repeat(20,1fr)] grid-rows-[repeat(10,1fr)] opacity-20">
                      {[...Array(200)].map((_, i) => (
@@ -90,7 +96,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* الجانب الأيمن: الفورم */}
+          {/* الجانب الأيمن: الفورم (الأسماء name متطابقة مع التمبلت) */}
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -124,7 +130,7 @@ const Contact = () => {
                     />
                 </div>
                 
-                {/* حقل مخفي للعنوان ليظهر في الإيميل كما في صورتك */}
+                {/* حقل مخفي للعنوان كما في صورتك */}
                 <input type="hidden" name="title" value="Portfolio Message" />
 
                 <div>
