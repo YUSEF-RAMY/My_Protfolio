@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0ea5e9;
+  --color-secondary: #6366f1;
+  --color-dark: #0f172a;
+  --color-light: #f8fafc;
+  --color-accent: #f59e0b;
+  
+  --font-sans: Inter, sans-serif;
+  
+  --animate-spin-slow: spin 3s linear infinite;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  .dark body {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+  }
+}
+
+html {
+    scroll-behavior: smooth;
+}
