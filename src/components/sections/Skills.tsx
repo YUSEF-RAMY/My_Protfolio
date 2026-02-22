@@ -33,7 +33,7 @@ const Skills = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
                   // التدرج هنا من البني الدافئ للأخضر الزيتي
-                  className="h-full bg-gradient-to-r from-[#5c4033] to-[#3a5a40] rounded-full"
+                  className="h-full bg-linear-to-r from-[#5c4033] to-[#3a5a40] rounded-full"
                 />
               </div>
             </div>

@@ -37,7 +37,7 @@ const Experience = () => {
 
         <div className="relative max-w-5xl mx-auto mt-16">
             {/* Timeline Line */}
-            <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-[#3a5a40]/0 via-[#3a5a40]/40 to-[#3a5a40]/0" />
+            <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-linear-to-b from-[#3a5a40]/0 via-[#3a5a40]/40 to-[#3a5a40]/0" />
 
              {experiences.map((exp, index) => {
                 const isEven = index % 2 === 0;
