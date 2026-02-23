@@ -9,106 +9,108 @@ const Contact = () => {
       title: "Email Me", 
       value: "yuseframy14@gmail.com", 
       href: "mailto:yuseframy14@gmail.com",
-      color: "bg-blue-500/10",
-      textColor: "text-blue-400"
+      color: "bg-[#3a5a40]/10",
+      textColor: "text-[#3a5a40]"
     },
     { 
       icon: Phone, 
       title: "Call Me", 
       value: "+20 1095132780", 
       href: "tel:+201095132780",
-      color: "bg-green-500/10",
-      textColor: "text-green-400"
+      color: "bg-[#3a5a40]/10",
+      textColor: "text-[#3a5a40]"
     },
     { 
       icon: Linkedin, 
       title: "LinkedIn", 
       value: "yusef-ramy", 
       href: "https://www.linkedin.com/in/yusef-ramy",
-      color: "bg-blue-600/10",
-      textColor: "text-blue-500"
+      color: "bg-[#3a5a40]/10",
+      textColor: "text-[#3a5a40]"
     },
     { 
       icon: Github, 
       title: "GitHub", 
       value: "YUSEF-RAMY", 
       href: "https://github.com/YUSEF-RAMY",
-      color: "bg-gray-500/10",
-      textColor: "text-gray-400"
+      color: "bg-[#3a5a40]/10",
+      textColor: "text-[#3a5a40]"
     }
   ];
 
   return (
     <section id="contact" className="py-24 bg-[#0a0a0a] relative overflow-hidden">
-      {/* الخلفية الجمالية */}
-      {/* <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-[#3a5a40]/10 blur-[120px] rounded-full" /> */}
-      <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-[#5c4033]/10 blur-[120px] rounded-full" />
+      {/* الـ Glows - نظفنا الألوان عشان متبقاش مصفره */}
+      {/* <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-[#3a5a40]/15 blur-[120px] rounded-full" /> */}
+      {/* <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-[#2d6a4f]/10 blur-[120px] rounded-full" /> */}
 
       <div className="container mx-auto px-6 relative z-10">
         <SectionHeading title="Get in Touch" subtitle="I'm always open to discussing new projects or creative opportunities." />
 
         <div className="max-w-5xl mx-auto mt-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             
             {/* كروت التواصل */}
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 gap-4">
               {contactMethods.map((item, index) => (
                 <motion.a
                   key={index}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: -30 }}
+                  initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group bg-[#111]/40 backdrop-blur-md p-6 rounded-3xl border border-white/5 flex items-center gap-6 hover:border-[#3a5a40]/30 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(58,90,64,0.2)]"
+                  className="group bg-[#111]/40 backdrop-blur-md p-5 rounded-2xl border border-white/5 flex items-center gap-5 hover:border-[#3a5a40]/30 transition-all duration-500"
                 >
-                  <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center ${item.textColor} group-hover:scale-110 transition-transform duration-500`}>
-                    <item.icon size={28} />
+                  <div className={`w-12 h-12 md:w-14 md:h-14 shrink-0 ${item.color} rounded-xl flex items-center justify-center ${item.textColor} group-hover:scale-110 transition-transform duration-500`}>
+                    <item.icon className="w-6 h-6 md:w-7 md:h-7" />
                   </div>
-                  <div className="flex-1">
-                    <h4 className="text-gray-400 text-sm font-medium mb-1">{item.title}</h4>
-                    <p className="text-gray-100 font-bold text-lg">{item.value}</p>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-gray-500 text-[10px] uppercase tracking-widest mb-1">{item.title}</h4>
+                    <p className="text-gray-100 font-bold text-sm md:text-lg truncate">{item.value}</p>
                   </div>
-                  <ExternalLink size={18} className="text-gray-600 group-hover:text-[#3a5a40] transition-colors" />
+                  <ExternalLink size={16} className="text-gray-700 group-hover:text-[#3a5a40] transition-colors" />
                 </motion.a>
               ))}
             </div>
 
-            {/* الجانب التفاعلي: الخريطة أو رسالة ترحيبية */}
+            {/* الجانب التفاعلي - التعديل الجوهري هنا لضمان الظهور في الفون */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-[#111]/40 backdrop-blur-md rounded-[2.5rem] border border-white/5 p-1 flex flex-col overflow-hidden"
+              className="bg-[#111]/40 backdrop-blur-md rounded-4xl border border-white/5 p-2 flex flex-col overflow-hidden min-h-95 md:min-h-full"
             >
-              <div className="relative flex-1 bg-black/40 rounded-[2.3rem] overflow-hidden group">
-                 {/* الأنيميشن الخاص بالخريطة */}
-                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#3a5a40_1px,transparent_1px)] bg-size-[20px_20px]" />
+              <div className="relative flex-1 bg-black/40 rounded-[1.8rem] overflow-hidden group flex items-center justify-center">
+                 {/* خلفية منقطة شيك */}
+                 <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#3a5a40_1.5px,transparent_1.5px)] bg-size-[25px_25px]" />
                  
-                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                 <div className="relative z-10 flex flex-col items-center justify-center text-center p-8">
                     <div className="relative mb-6">
+                        {/* النبض اللي حوالين اللوكيشن */}
                         <motion.div 
-                          animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.1, 0.3] }}
+                          animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.1, 0.3] }}
                           transition={{ duration: 3, repeat: Infinity }}
                           className="absolute inset-0 bg-[#3a5a40] rounded-full blur-xl"
                         />
-                        <div className="relative w-20 h-20 bg-[#3a5a40]/20 rounded-full flex items-center justify-center text-[#3a5a40] border border-[#3a5a40]/30">
+                        <div className="relative w-16 h-16 md:w-20 md:h-20 bg-[#0a0a0a] rounded-full flex items-center justify-center text-[#3a5a40] border border-[#3a5a40]/30 shadow-2xl">
                            <MapPin size={32} />
                         </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">Based in Cairo, Egypt</h3>
-                    <p className="text-gray-400 leading-relaxed max-w-xs">
-                       Available for remote work worldwide and local opportunities in Egypt.
+                    
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-3">Cairo, Egypt</h3>
+                    <p className="text-gray-400 leading-relaxed max-w-65 text-sm md:text-base mb-8">
+                       Available for remote work worldwide and local roles in Egypt.
                     </p>
                     
+                    {/* جزء الوقت - خليناه Button شيك */}
                     <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="mt-8 px-8 py-3 bg-[#3a5a40] text-white rounded-full font-bold shadow-lg shadow-[#3a5a40]/20 cursor-default"
+                      whileHover={{ scale: 1.02 }}
+                      className="px-6 py-3 bg-[#3a5a40]/10 border border-[#3a5a40]/20 text-[#3a5a40] rounded-full font-bold text-xs tracking-widest uppercase flex items-center gap-2"
                     >
-                      Working Hours: 09:00 AM - 06:00 PM
+                      <span className="w-2 h-2 bg-[#3a5a40] rounded-full animate-pulse" />
+                      09:00 AM - 06:00 PM
                     </motion.div>
                  </div>
               </div>
